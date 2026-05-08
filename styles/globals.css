@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Exo+2:wght@100;300;400;600;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-cyan: #00f5ff;
+  --neon-green: #39ff14;
+  --neon-orange: #ff6b00;
+  --neon-pink: #ff0080;
+  --bg-dark: #020408;
+  --bg-card: rgba(10, 22, 40, 0.8);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #020408; }
+::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 2px; }
+
+/* 3D Card effect */
+.card-3d {
+  background: linear-gradient(135deg, rgba(10,22,40,0.9) 0%, rgba(6,13,20,0.95) 100%);
+  border: 1px solid rgba(0,245,255,0.15);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease;
+}
+
+.card-3d::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+  opacity: 0.6;
+}
+
+.card-3d::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(0,245,255,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card-3d:hover {
+  transform: translateY(-4px) rotateX(2deg);
+  border-color: rgba(0,245,255,0.4);
+  box-shadow: 0 20px 60px rgba(0,245,255,0.1), 0 0 0 1px rgba(0,245,255,0.1);
+}
+
+/* Neon text */
+.neon-text-cyan {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(0,245,255,0.8), 0 0 20px rgba(0,245,255,0.4);
+}
+
+.neon-text-green {
+  color: var(--neon-green);
+  text-shadow: 0 0 10px rgba(57,255,20,0.8), 0 0 20px rgba(57,255,20,0.4);
+}
+
+.neon-text-orange {
+  color: var(--neon-orange);
+  text-shadow: 0 0 10px rgba(255,107,0,0.8), 0 0 20px rgba(255,107,0,0.4);
+}
+
+/* Neon button */
+.btn-neon {
+  background: transparent;
+  border: 2px solid var(--neon-cyan);
+  color: var(--neon-cyan);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 12px 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--neon-cyan);
+  transform: translateX(-101%);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.btn-neon:hover::before { transform: translateX(0); }
+.btn-neon:hover { color: #020408; box-shadow: 0 0 30px rgba(0,245,255,0.6); }
+.btn-neon span { position: relative; z-index: 1; }
+
+.btn-feed {
+  background: linear-gradient(135deg, rgba(255,107,0,0.2), rgba(255,0,128,0.2));
+  border: 2px solid var(--neon-orange);
+  color: var(--neon-orange);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 40px;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255,107,0,0.3);
+}
+
+.btn-feed:hover {
+  background: linear-gradient(135deg, rgba(255,107,0,0.4), rgba(255,0,128,0.4));
+  box-shadow: 0 0 40px rgba(255,107,0,0.6);
+  transform: scale(1.05);
+}
+
+.btn-feed:active { transform: scale(0.98); }
+
+/* Gauge ring */
+.gauge-ring {
+  filter: drop-shadow(0 0 8px var(--neon-cyan));
+}
+
+/* Grid bg */
+.grid-bg {
+  background-image: linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Particle dots */
+.particle {
+  position: fixed;
+  width: 2px; height: 2px;
+  border-radius: 50%;
+  background: var(--neon-cyan);
+  opacity: 0;
+  animation: particle-float linear infinite;
+}
+
+@keyframes particle-float {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(-10px) translateX(30px); opacity: 0; }
+}
+
+/* Status dot */
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50% { box-shadow: 0 0 0 6px transparent; opacity: 0.7; }
+}
+
+/* Scan line */
+.scan-line {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0,245,255,0.4), transparent);
+  animation: scan-move 6s linear infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes scan-move {
+  0% { top: 0; }
+  100% { top: 100vh; }
+}
+
+/* Weight bar fill */
+.weight-fill {
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background: linear-gradient(90deg, var(--neon-cyan), #00a8ff);
+  box-shadow: 0 0 10px rgba(0,245,255,0.6);
+  border-radius: 4px;
+}
+
+/* Servo animation */
+@keyframes servo-open {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(90deg); }
+}
+
+@keyframes servo-close {
+  0% { transform: rotate(90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* Input neon */
+.input-neon {
+  background: rgba(0,245,255,0.05);
+  border: 1px solid rgba(0,245,255,0.2);
+  color: var(--neon-cyan);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.8rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.input-neon:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 15px rgba(0,245,255,0.2);
+  background: rgba(0,245,255,0.08);
+}
+
+/* Alert pulse */
+.alert-pulse {
+  animation: alert-blink 0.8s ease-in-out infinite;
+}
+
+@keyframes alert-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Hexagon bg pattern */
+.hex-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50V17L28 0l28 17v33z' fill='none' stroke='rgba(0,245,255,0.04)' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
