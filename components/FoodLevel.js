@@ -1,4 +1,4 @@
-export default function FoodLevel({ distance = 15, maxDistance = 30 }) {
+export default function FoodLevel({ distance = 5, maxDistance = 30 }) {
   // distance > maxDistance = empty, distance small = full
   const fillPct = Math.max(0, Math.min(100, ((maxDistance - distance) / maxDistance) * 100))
   const isLow = fillPct < 30

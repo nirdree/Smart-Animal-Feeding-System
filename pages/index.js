@@ -213,7 +213,7 @@ export default function Dashboard() {
                 Food Container
               </span>
             </div>
-            <FoodLevel distance={status.distance} maxDistance={30} />
+            <FoodLevel distance={status.distance} maxDistance={8} />
             {isLowFood && (
               <div className="mt-4 px-4 py-2 rounded-lg alert-pulse w-full text-center"
                 style={{ background: 'rgba(255,107,0,0.1)', border: '1px solid rgba(255,107,0,0.4)' }}>
